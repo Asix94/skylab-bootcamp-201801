@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script type="text/javascript">
+	
+	/*Skylab Airlines! ✈️🛩
+
+	(Los datos de los vuelos están al final del enunciado, podéis usarlos en vuestro código)
+
+	Programa una inferfaz de usuario para una aerolinea (por terminal...). Esta aerolinea dispondrá de 10 vuelos para el dia de hoy, para empezar, estos vuelos estarán declarados de manera global, cuando se llame a la función:
+
+	Se preguntará por el nombre de usuario y dará la bienvenida.
+	El usuario visualizará todos los vuelos disponibles de una forma amigable: El vuelo con origen: Barcelona, y destino: Madrid tiene un coste de XXXX€ y no realiza ninguna escala.
+	A continuación, el usuario verá el coste medio de los vuelos.
+	También podrá ver cuantos vuelos efectúan escalas.
+	Y, sabiendo que los ultimos 5 vuelos (los últimos 5 ID's) son los últimos del día, muestra al usuario sus destinos. */
+
+	function interface(){
+
+		console.log('Tu Nombre');
+
+		name();
+
+		console.log('Vuelos');
+
+		Allflys();
+
+		console.log('Media');
+
+		MeanFly();
+
+		console.log('Vuelos con escala');
+
+		Scale();
+
+		console.log('Los 5 ultimos vuelos');
+
+		FiveLast();
+
+	}
+
+	function Constructflys(id,to,from,cost,scale){
+
+		this.id = id;
+		this.to = to;
+		this.from = from;
+		this.cost = cost;
+		this.scale = scale;
+		this.properylist = function(){
+			console.log("El vuelo con origen: " + this.to + " y destino: " + this.from + " tiene un coste de " + this.cost + "€ y su escala es: " + this.scale);
+		}
+
+	}
+
+	function flys(){
+
+		var flights = [
+			f0 = new Constructflys(00,"New York","Barcelona",700,false),
+			f1 = new Constructflys(01,"Los Angeles","Madrid",1100,true),
+			f2 = new Constructflys(02,"Paris","Barcelona",210,false),
+			f3 = new Constructflys(03,"Roma","Barcelona",150,false),
+			f4 = new Constructflys(04,"London","Madrid",200,false),
+			f5 = new Constructflys(05,"Madrid","Barcelona",90,false),
+			f6 = new Constructflys(06,"Tokyo","Madrid",1500,true),
+			f7 = new Constructflys(07,"Shangai","Barcelona",800,true),
+			f8 = new Constructflys(08,"Sydney","Barcelona",150,true),
+			f9 = new Constructflys(09,"Tel-Aviv","Madrid",150,false),
+		]
+
+		return flights;
+	}
+
+	function name(){
+
+		var name = prompt("What's your name","");
+		if(name != ""){
+			console.log("Hello " + name + " , Welcome!!");
+		}
+	}
+
+	function Allflys(){
+
+		for(var i = 0; i < flys().length; i++){
+			flys()[i].properylist(); 
+		}
+
+	}
+
+	function MeanFly(){
+
+		var cost = 0;
+
+		for(var i = 0; i < flys().length; i++){
+			cost = flys()[i].cost + cost; 
+		}
+
+		mean = cost / flys().length;
+		console.log("La media del coste de los vuelos es de: " + mean + "€");
+
+	}
+
+	function Scale(){
+
+		for(var i = 0; i < flys().length; i++){
+			if (flys()[i].scale == true) {
+				flys()[i].properylist();
+			} 
+		}
+	}
+
+	function FiveLast(){
+
+		console.log(flys().slice(-5));
+	}
+
+	interface();
+
+
+</script>

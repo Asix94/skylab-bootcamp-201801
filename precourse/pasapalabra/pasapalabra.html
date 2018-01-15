@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pasapalabra</title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script type="text/javascript">
+	
+	/*Pasapalabra Game! (Final JS) 🎮⁉️
+
+	Resource: https://www.youtube.com/watch?v=xJp2c_rcHDc
+
+	Haz el juego del Pasapalabra, el programa deberá lanzar la definición de una palabra y el usuario deberá adivinar que palabra estamos tratando, por ejemplo:
+
+	'>>>'With the letter "M", Capital of Spain, located in the center of the country.
+	'>>>' "Madrid"
+	'>>>'Correct, you have 1 Point!
+	Tu juego debería hacer una pregunta por cada letra del alfabeto, al final del juego, y habiendo respondido todas las letras, deberá indicarle al usuario cuantas letras ha fallado y cuantas ha acertado. Si el usuario responde con "pasapalabra" el juego deberá estar preparado para entender que en ese momento, el usuario no responderá esa pregunta, y no estará acertada ni fallada, la dejará para la siguiente ronda. El juego deberá, cuando finalize, mostrar un ranking de usuarios con el nombre y ordenados por cantidad de letras acertadas.*/
+	
+	var questions = [];
+	var ranking = [];
+	var correct = 0;
+	var incorrect = 0;
+	var count2 = 0;
+
+	function pasapalabra() {
+		
+		console.log("PASAPALABRA !!");
+		preguntas();
+		answers();
+		rankings();
+		returngames();
+	}
+
+	function constructquestion(letter,answer,status,question){
+
+		this.letter = letter;
+		this.answer = answer;
+		this.status = status;
+		this.question = question;
+
+	}
+
+	function constructranking(name,puntuation){
+
+		this.name = name;
+		this.puntuation = puntuation;
+
+	}
+
+	function preguntas(){
+
+			questions = [
+
+			A = new constructquestion("a","abducir",0,"CON LA A. Dicho de una supuesta criatura extraterrestre: Apoderarse de alguien"),
+			B = new constructquestion("b","bingo",0,"CON LA B. Juego que ha sacado de quicio a todos los 'Skylabers' en las sesiones de precurso"),
+			C = new constructquestion("c","churumbel",0,"CON LA C. Niño, crío, bebé"),
+			D = new constructquestion("d","diarrea",0,"CON LA D. Anormalidad en la función del aparato digestivo caracterizada por frecuentes evacuaciones y su consistencia líquida"),
+			E = new constructquestion("e","ectoplasma",0,"CON LA E. Gelatinoso y se encuentra debajo de la membrana plasmática. Los cazafantasmas medían su radiación"),
+			F = new constructquestion("f","facil",0,"CON LA F. Que no requiere gran esfuerzo, capacidad o dificultad"),
+			G = new constructquestion("g","galaxia",0,"CON LA G. Conjunto enorme de estrellas, polvo interestelar, gases y partículas"),
+			H = new constructquestion("h","harakiri",0,"CON LA H. Suicidio ritual japonés por desentrañamiento"),
+			I = new constructquestion("i","iglesia",0,"CON LA I. Templo cristiano"),
+			J = new constructquestion("j","jabali",0,"CON LA J. Variedad salvaje del cerdo que sale en la película 'El Rey León', de nombre Pumba"),
+			K = new constructquestion("k","kamikaze",0,"CON LA K. Persona que se juega la vida realizando una acción temeraria"),
+			L = new constructquestion("l","licantropo",0,"CON LA L. Hombre lobo"),
+			M = new constructquestion("m","misantropo",0,"CON LA M. Persona que huye del trato con otras personas o siente gran aversión hacia ellas"),
+			N = new constructquestion("n","necedad",0,"CON LA N. Demostración de poca inteligencia"),
+			Ñ = new constructquestion("ñ","señal",0,"CONTIENE LA Ñ. Indicio que permite deducir algo de lo que no se tiene un conocimiento directo."),
+			O = new constructquestion("o","orco",0,"CON LA O. Humanoide fantástico de apariencia terrible y bestial, piel de color verde creada por el escritor Tolkien"),
+			P = new constructquestion("p","protoss",0,"CON LA P. Raza ancestral tecnológicamente avanzada que se caracteriza por sus grandes poderes psíonicos del videojuego StarCraft"),
+			Q = new constructquestion("q","queso",0,"CON LA Q. Producto obtenido por la maduración de la cuajada de la leche"),
+			R = new constructquestion("r","raton",0,"CON LA R. Roedor"),
+			S = new constructquestion("s","stackoverflow",0,"CON LA S. Comunidad salvadora de todo desarrollador informático"),
+			T = new constructquestion("t","terminator",0,"CON LA T. Película del director James Cameron que consolidó a Arnold Schwarzenegger como actor en 1984"),
+			U = new constructquestion("u","unamuno",0,"CON LA U. Escritor y filósofo español de la generación del 98 autor del libro 'Niebla' en 1914"),
+			V = new constructquestion("v","vikingos",0,"CON LA V. Nombre dado a los miembros de los pueblos nórdicos originarios de Escandinavia, famosos por sus incursiones y pillajes en Europa"),
+			W = new constructquestion("w","sandwich",0,"CONTIENE LA W. Emparedado hecho con dos rebanadas de pan entre las cuales se coloca jamón y queso"),
+			X = new constructquestion("x","botox",0,"CONTIENE LA X. Toxina bacteriana utilizada en cirujía estética"),
+			Y = new constructquestion("y","peyote",0,"CONTIENE LA Y. Pequeño cáctus conocido por sus alcaloides psicoactivos utilizado de forma ritual y medicinal por indígenas americanos"),
+			Z = new	constructquestion("z","zen",0,"CON LA Z. Escuela de budismo que busca la experiencia de la sabiduría más allá del discurso racional"),
+		];
+
+	}
+
+	function userranking(name,puntuation){
+
+		ranking.push(
+			name = new constructranking(name,puntuation),
+		)
+	}
+
+	function answers(){
+
+		for(var i=0; i<questions.length; i++){
+
+			if(questions[i].status == 0){
+
+				console.log(questions[i].question)
+				var answer = prompt(questions[i].question);
+				console.log(answer);
+				if(answer == questions[i].answer){
+					console.log("CORRECTO TIENES 1 PUNTO");
+					questions[i].status = 1;
+					correct++;
+					count2++;
+				}
+				else if(answer == 'pasapalabra'){
+					console.log("PASAPALABRA");
+				}
+				else{
+					console.log("INCORRECTO");
+					questions[i].status = 1;
+					incorrect++;
+					count2++;
+				}
+
+			}
+
+		}
+
+		if (count2 < questions.length) {
+			answers();
+		}
+
+	}
+
+	function rankings(){
+
+		console.log("Felicidades, has tenido un total de " + correct + " preguntas acertadas, y un total de " + incorrect + "preguntas falladas.");
+		var name = prompt("Inserta un nombre para registrarte en el ranking, recuerda que si no insertas nada no apareceras en el ranking global");
+		if(name != "" && name != null){
+			userranking(name,correct);
+		}
+		console.log("Este es el ranking de jugadores de pasapalabra");
+		for(var i=0; i<ranking.length; i++){
+			console.log(ranking[i].name + " " + ranking[i].puntuation);
+		}
+	}
+
+	function returngames(){
+
+		var returngame = confirm("Quieres volvere a jugar?");
+		if(returngame == true){
+			questions = [];
+			correct = 0;
+			incorrect = 0;
+			count2 = 0;
+			pasapalabra();
+		}
+		else{
+			console.log("Gracias por jugar");
+		}
+	}
+
+	pasapalabra();
+
+</script>

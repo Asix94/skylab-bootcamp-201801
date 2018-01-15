@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+</html>
+
+<script type="text/javascript">
+	
+	/*BINGO GAME! 🎲🎰
+
+	Realiza un programa que simule un Bingo. Cuando se ejecute, pedirá el nombre del jugador y deberá guardarse. Durante el primer turno se mostrará un cartón con 15 números (excluyendo el 0 siempre), para pasar al siguiente turno el usuario deberá confirmar mediante confirm() visualizándose otro número, si coincide con alguno de los existentes en el cartón, cambiará por una "X" o un 0. El cartón se mostrará, al final de cada turno, con los cambios efectuados, indicándole al usuario qué número se ha encontrado. El programa deberá preguntar al usuario al inicio de cada turno si desea continuar, en caso de que se continúe, seguirá el mismo patrón que hasta el momento.
+
+	Por supuesto, cuando todos los números de una misma linea estén en "X", mostrará un mensaje "LINEA!", pero la ejecución seguirá, el juego solo acabará cuando todos los números estén a "X".
+
+	Cuando el juego concluya, deberá decirle al usuario en cuantos turnos se ha completado el cartón. Por último, deberá preguntar si desea volver a jugar.*/
+
+	var bombo = [];
+	var linea1 = [];
+	var linea2 = [];
+	var linea3 = [];
+	var game = 0;
+	var countspinrulet = 0;
+
+	function bingo() {
+		
+		name();
+
+		bombos();
+		fila1();
+		fila2();
+		fila3();
+
+		console.log(linea1);
+		console.log(linea2);
+		console.log(linea3);
+		
+		question();
+
+	}
+
+	function name(){
+		
+		var name = prompt("Tell me, who are you?", "");
+		if (name != "") {
+			console.log("Hello " + name + " , ready to play? This is your card:");
+		}
+
+	}
+
+	function bombos(){
+
+		for(i=1; i<=99; i++){
+			bombo.push(i);
+		}
+
+	}
+
+	function getrandom(min,max){
+
+		return Math.floor(Math.random() * (max - min) + min);
+	}
+
+	function fila1(){
+
+		for (var i=0; i<5; i++) {
+			linea1.push(getrandom(1,34));
+		}
+
+		return linea1;
+	}
+
+	function fila2(){
+		
+		for (var i=0; i<5; i++) {
+			linea2.push(getrandom(34,65));
+		}		
+
+		return linea2;
+	}
+
+	function fila3(){
+
+		for (var i=0; i<5; i++){
+			linea3.push(getrandom(66,100));
+		}
+
+		return linea3;
+	}
+
+	function question(){
+
+		var c = confirm("Next turn, you confirm?");
+		if(c == true){
+			spinrulet();
+		}
+		else{
+			console.log("Sorry! You have not finished the Bingo game, yours are " + game + " turns!");
+			var cc = confirm("Do you want to play again?");
+			if(cc == true){
+				bombo = [];
+				linea1 = [];
+				linea2 = [];
+				linea3 = [];
+				game = 0;
+				countspinrulet = 0;
+				bingo();
+			}
+			else{
+				console.log("Bye, Thanks for coming")
+			}
+		}
+	} 
+
+	function spinrulet1(num){
+
+		for( i=0; i<linea1.length; i++){
+			if(linea1[i] == num){
+				linea1.splice(i,1,'X')
+			}
+		}
+
+		console.log(linea1);
+
+	}
+
+	function spinrulet2(num){
+
+		for( i=0; i<linea2.length; i++){
+			if(linea2[i] == num){
+				linea2.splice(i,1,'X')
+			}
+		}
+
+		console.log(linea2);
+
+	}
+
+	function spinrulet3(num){
+
+		for( i=0; i<linea3.length; i++){
+			if(linea3[i] == num){
+				linea3.splice(i,1,'X')
+			}
+		}
+
+		console.log(linea3);
+
+	}
+
+	function spinrulet(){
+
+		game ++;
+
+		aleatorio = Math.floor(Math.random()*(bombo.length));
+		num = bombo[aleatorio];
+		bombo.splice(aleatorio, 1);
+
+		console.log(num);
+
+		spinrulet1(num);
+		spinrulet2(num);
+		spinrulet3(num);
+
+		if(proveline1() == true && proveline2() == true && proveline3() == true) {
+			console.log("Bingo !!");
+			console.log("Congrats! You finish the Bingo game in " + game + " turns!");
+			var cc = confirm("Do you want to play again?");
+			if(cc == true){
+				bombo = [];
+				linea1 = [];
+				linea2 = [];
+				linea3 = [];
+				game = 0;
+				countspinrulet = 0;
+				bingo();
+			}
+		}
+
+		else if(proveline1() == true || proveline2() == true || proveline3() == true){
+
+			if (countspinrulet == 0) {
+
+				countspinrulet ++;
+				console.log("Linea !!");
+				question();
+			}
+
+			else{
+
+				question();
+			}
+		}
+
+		else{
+			question();
+		}
+
+	}
+
+	function proveline1(){
+
+		count = 0;
+
+		for(i=0; i<linea1.length;i++){
+			if (linea1[i] == 'X'){
+				count ++;
+			}
+		}
+
+		if(count == 5){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	function proveline2(){
+
+		count = 0;
+
+		for(i=0; i<linea2.length;i++){
+			if (linea2[i] == 'X'){
+				count ++;
+			}
+		}
+
+		if(count == 5){
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}
+
+	function proveline3(){
+
+		count = 0;
+
+		for(i=0; i<linea3.length;i++){
+			if (linea3[i] == 'X'){
+				count ++;
+			}
+		}
+
+		if(count == 5){
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}
+
+	bingo();
+
+</script>
