@@ -1,0 +1,110 @@
+<script>
+function largerInteger(num1,num2){
+    if(num1 > num2)
+        return num1;
+    else
+        return num2;
+}
+
+console.log(largerInteger(1,2));
+
+function signProduct(num1,num2,num3){
+    var suma = num1 * num2 * num3;
+    if(suma < 0)
+        console.log('The sign is -');
+    else   
+        console.log('The sing is +');
+}
+
+signProduct(3,-7,2);
+
+function short_number(num1,num2,num3){
+    if(num1 > num2 && num1 > num3 && num2 > num3)
+        return num1 + " " + num2 + " " + num3;
+    else if(num2 > num1 && num2 > num3 && num1 > num3)
+        return num2 + " " + num1 + " " + num3;
+    else if(num3 > num1 && num3 > num2 && num1 > num2)
+        return num3 + " " + num1 + " " + num2;
+    else if(num1 > num2 && num1 > num3 && num2 < num3)
+        return num1 + " " + num3 + " " + num2;
+}
+
+console.log(short_number(4,0,-1));
+
+function largest_number(num1,num2,num3,num4,num5){
+    if(num1 > num2 && num1 > num3 && num1 > num4 && num1 > num5)
+        return num1;
+    else if(num2 > num1 && num2 > num3 && num2 > num4 && num2 > num5)
+        return num2;
+    else if(num3 > num1 && num3 > num2 && num3 > num4 && num3 > num5)
+        return num3;
+    else if(num4 > num1 && num4 > num2 && num4 > num3 && num4 > num5)
+        return num4;
+    else if(num5 > num1 && num5 > num2 && num5 > num3 && num5 > num4)
+        return num5;
+}
+
+console.log(largest_number(-5, -2, -6, 0, -1));
+
+/*function odd_or_evenwhile(num){
+    res = '';
+    while(num--){
+        if(num%2 == 0)
+            res += num + ' is even\n';
+        else   
+            res += num + ' is odd\n';
+    }
+    return res;
+}
+
+console.log(odd_or_evenwhile(15));*/
+
+function odd_or_evendowhile(num){
+    res = '';
+    do{
+        if(num%2 == 0)
+            res += num + ' is even\n';
+        else   
+            res += num + ' is odd\n';
+    }while(num--)
+
+    return res;
+}
+
+console.log(odd_or_evendowhile(15));
+
+/*function FizzBuzz(num){
+    while(num--){
+        if(num%3 == 0 && num%5 == 0)
+            console.log(num + ' FizzBuzz');
+        else if(num%3 == 0)
+            console.log(num + ' Fizz');
+        else if(num%5 == 0)
+            console.log(num + ' Buzz');
+    }
+}
+
+FizzBuzz(100);*/
+
+function contruct_pattern(num,simbol){
+    var sumsimbol = '';
+    while(num--){
+        sumsimbol += sumsimbol + simbol + '\n';
+    }
+    return sumsimbol;
+}
+
+contruct_pattern(5,'*');
+
+/*function under_1000(num){
+    var under = 0;
+    while(num--){
+        if(num%3 == 0 || num%5 == 0)
+            under = under + num;
+    }   
+    console.log(under);
+}
+
+under_1000(1000);*/
+
+</script>
