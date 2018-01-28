@@ -285,7 +285,18 @@ console.log(swapCase('The Quick Brown Fox'));
 
 /*Write a JavaScript program which prints the elements of the following array. Note : Use nested for loops.*/
 
-function PrintElementsArray(){
+function PrintElementsArray(arr){
+    for(i=0;i<arr.length;i++){
+        console.log('row ' + i);
+        if(arr[i] instanceof Array){
+            for(j=0;j<arr[i].length;j++){
+                console.log(arr[i][j]);
+            }
+        }
+        else{
+            console.log(arr[i]);
+        }
+    }
 
 }
 
@@ -294,27 +305,54 @@ console.log(PrintElementsArray([[1, 2, 1, 24], [8, 11, 9, 4], [7, 0, 7, 27], [7,
 
 /*Write a JavaScript function to create a specified number of elements with pre-filled string value array.*/
 
-function arrayFilled(){
+function arrayFilled(num,string){
+    var arr = [];
+    for(i=0;i<num;i++){
+        arr.push(string);
+    }
 
+    return arr;
 }
 
-console.log('18) ' + arrayFilled());
+console.log('18) array_filled (string)');
+console.log(arrayFilled(3, 'default value'));
+console.log(arrayFilled(4, 'password'));
 
 /*Write a JavaScript program to find the sum of squares of a numeric vector.*/
 
-function sumSquares(){
+function sumSquares(arr){
+    var sum = 0;
+    for(var i=arr.length-1;i>0;i--){
+        sum += Math.pow(arr[i],2);
+    }
 
+    return sum;
 }
 
-console.log('19) ' + sumSquares());
+console.log('19) Sum squares');
+console.log(sumSquares([0,1,2,3,4]));
 
 /*Write a JavaScript program to remove duplicate items from an array (ignore case sensitivity).*/
 
-function removeDuplicate(){
+function removeDuplicate(arr){
+    var count = 0;
+    for(i=0;i<arr.length;i++){
+        for(j=0;j<arr.length;j++){
+            if(arr[i] == arr[j]){
+                count++;            
+            }
+        }
+        if(count > 1){
+            arr.splice(i,1);
+            count = 0;
+        }
+    }
 
+    return arr;
 }
 
-console.log('20) ' + removeDuplicate());
+console.log('20) removeDuplicate');
+console.log(removeDuplicate([1,2,3,2,3]));
 
 /*We have the following arrays : 
 color = ["Blue ", "Green", "Red", "Orange", "Violet", "Indigo", "Yellow "]; 
@@ -324,174 +362,409 @@ Write a JavaScript program to display the colors in the following way :
 "2nd choice is Green." 
 "3rd choice is Red."*/
 
-function showChoices(){
+function showChoices(color,num){
+    var chain = '';
+    for(i=0;i<color.length;i++){
+        switch(i+1){
+            case 1:
+                chain += (i+1)+num[0] + ' choise is ' + color[i] + '\n';
+                break;
+            case 2:
+                chain += (i+1)+num[1] + ' choise is ' + color[i] + '\n';
+                break;  
+            case 3:
+                chain += (i+1)+num[2] + ' choise is ' + color[i] + '\n';
+                break;
+            default:
+                chain += (i+1)+num[3] + ' choise is ' + color[i] + '\n';
+                break;
+        }   
+    }
 
+    return chain;
 }
 
-console.log('21) ' + showChoices());
+console.log('21) showChoices');
+console.log(showChoices(["Blue ", "Green", "Red", "Orange", "Violet", "Indigo", "Yellow "],["st","nd","rd","th"]));
 
 /*Find the leap years in a given range of years.*/
 
 function showLeapYear(){
+    chain = '';
+    for(i=2000;i<2018;i++){
+        if(i%400==0 || i%4==0){
+            chain += i + ' this year is leap\n'
+        }
+    }
 
+    return chain;
 }
 
-console.log('22) ' + showLeapYear());
+console.log('22) showLeapYears');
+console.log(showLeapYear());
 
 /*Write a JavaScript program to shuffle an array.*/
 
-function shuffleArray(){
+function shuffleArray(arr){
+    for(i=arr.length-1;i>0;i--){
+        var j, x, i;
+        j = Math.floor(Math.random() * (i + 1));
+        x = arr[i];
+        arr[i] = arr[j];
+        arr[j] = x;
+    }
 
+    return arr;
 }
 
-console.log('23) ' + shuffleArray());
+console.log('23) shuffleArray');
+console.log(shuffleArray([1,2,3]));
 
 /*Write a JavaScript program to perform a binary search.*/
 
-function binarySearch(){
+function binarySearch(items,find){
+    var firstIndex = 0;
+    var lastIndex = items.length -1;
+    var middleIndex = Math.floor((lastIndex + firstIndex)/2); // 3
 
+    while(items[middleIndex] != find && firstIndex < lastIndex){
+        if(find < items[middleIndex]){
+            lastIndex = middleIndex -1;
+        }
+        else if(find > items[middleIndex]){
+            firstIndex = middleIndex + 1;
+        }
+        middleIndex = Math.floor((lastIndex + firstIndex)/2);
+    }
+    
+    return (items[middleIndex != find]) ? -1 : middleIndex;
 }
 
-console.log('24) ' + binarySearch());
+console.log('24) binarySearch')
+console.log(binarySearch([1, 2, 3, 4, 5, 7, 8, 9], 1));
+console.log(binarySearch([1, 2, 3, 4, 5, 7, 8, 9], 5));
 
 /*There are two arrays with individual values, write a JavaScript program to compute the sum of each individual index 
 value from the given arrays.*/
 
-function sumPosition(){
+function sumPosition(arr1,arr2){
+    var valor
+    var newarr = [];
 
+    (arr1 < arr2)? valor = arr2.length : valor = arr1.length;
+
+    for(i=0;i<valor;i++){
+        if(arr1[i] === undefined){
+            newarr.push(0 + arr2[i]);
+        }
+        else if(arr2[i] === undefined){
+            newarr.push(arr1[i] + 0);
+        }
+        else{
+            newarr.push(arr1[i] + arr2[i]);
+        }
+    }
+
+    return newarr;
 }
 
-console.log('25) ' + sumPosition());
+console.log('25) sumPositions')
+console.log(sumPosition([1,0,2,3,4],[3,5,6,7,8,13]));
 
 /*Write a JavaScript function to generate an array between two integers of 1 step length.*/
 
-function generateArrayStep(){
+function generateArrayStep(start,end){
+    var arr = [];
 
+    for(i=start;i<=end;i++){
+        arr.push(i);
+    }
+
+    return arr;
 }
 
-console.log('26) ' + generateArrayStep());
+console.log('26) generateArraySteps');
+console.log(generateArrayStep(4, 7));
+console.log(generateArrayStep(-4, 7));
 
 /*Write a JavaScript program to flatten a nested (any depth) array. 
 If you pass shallow, the array will only be flattened a single level.*/
 
-function flattenArray(){
+function flattenArray(arr,shallow){
+    var newarr = [];
 
-}
+    for(i=0;i<arr.length;i++){
+        if(arr[i] instanceof Array){
+            for(j=0;j<arr[i].length;j++){
+                if(arr[i][j] instanceof Array){
+                    for(k=0;k<arr[i][j].length;k++){
+                        if(arr[i][j][k] instanceof Array){
+                            for(l=0;l<arr[i][j][k].length;l++){
+                                newarr.push(arr[i][j][k][l]);
+                            }
+                        }
+                        else{
+                            newarr.push(arr[i][j][k]);
+                        }
+                    }
+                }   
+                else{ 
+                    newarr.push(arr[i][j]);
+                }
+            }
+        }
+        else{
+            newarr.push(arr[i]);
+        }
+    }
 
-console.log('27) ' + flattenArray());
+    return newarr;
+}   
+
+console.log('27) flattenArray');
+console.log(flattenArray([1, [2], [3, [[4]]],[5,6]]));
+console.log(flattenArray([1, [2], [3, [[4]]],[5,6]]));
 
 /*Write a JavaScript program to compute the union of two arrays. Sample Data :*/
 
-function unionArray(){
+function unionArray(arr1,arr2){
+    for(i=0;i<arr1.length;i++){
+        for(j=0;j<arr2.length;j++){
+            if(arr1[i] === arr2[j]){
+                arr1.splice(i, 1);
+                i--;
+            }
+        }
+    }
+    newarr = arr1.concat(arr2);
+    newarr.sort();
+    return  newarr;
 
 }
 
-console.log('28) ' + unionArray());
+console.log('28) unionArray');
+console.log(unionArray([1, 2, 3], [100, 2, 1, 10]));
 
 /*Write a JavaScript function to remove. 'null', '0', '""', 'false', 'undefined' and 'NaN' values from an array.*/
 
-function removeFlasy(){
+function removeFlasy(arr){
+    reg = /^-?[1-9]*$/gm
+    for(i=0;i<arr.length;i++){
+        if(reg.test(arr[i]) != true){
+            arr.splice(i,1);
+            i--;
+        }
+    }
 
+    return arr;
 }
 
-console.log('29) ' + removeFlasy());
+console.log('29) removeFalsy');
+console.log(removeFlasy([NaN, 0, 15, false, -22, '',undefined, 47, null]));
 
 /*Write a JavaScript function to get the first element of an array. 
 Passing a parameter 'n' will return the first 'n' elements of the array.*/
 
-function first(){
+function first(arr,element){
+    chain = [];
 
+    if (element > arr.length){
+        element = arr.length;
+    }  
+
+    if(element === undefined){
+        chain.push(arr[0]);
+    }
+    else{
+        for(i=0;i<element;i++){
+            chain.push(arr[i]);
+        }
+    }
+
+    return chain;
 }
 
-console.log('30) ' + first());
+console.log('30) first');
+console.log(first([7, 9, 0, -2]));
+console.log(first([],3));
+console.log(first([7, 9, 0, -2],3));
+console.log(first([7, 9, 0, -2],6));
+console.log(first([7, 9, 0, -2],-3));
 
 /*Write a JavaScript function to sort the following array of objects by title value.*/
 
-function sortObjectsTitle(){
+function sortObjectsTitle(object){
+    object.sort(function(a, b) {
+        var x = a.title.toLowerCase();
+        var y = b.title.toLowerCase();
+        if (x < y) {return -1;}
+        if (x > y) {return 1;}
+        return 0;
+    });
 
+    return object;
 }
 
-console.log('31) ' + sortObjectsTitle());
+console.log('31) sortObjectsTitle');
+console.log(sortObjectsTitle([ 
+    { author: 'Bill Gates', title: 'The Road Ahead', libraryID: 1254},
+    { author: 'Steve Jobs', title: 'Walter Isaacson', libraryID: 4264},
+    { author: 'Suzanne Collins', title: 'Mockingjay: The Final Book of The Hunger Games', libraryID: 3245}
+    ]));
 
 /*Write a JavaScript program to find a pair of elements (indices of the two numbers) 
 from an given array whose sum equals a specific target number.*/
 
-function findPairSum(){
-
+function findPairSum(arr,element){
+    chain = '';
+    for(i=0;i<arr.length;i++){
+        for(j=0;j<arr.length;j++){
+            if(arr[i] + arr[j] === element){
+                chain += 'Index ' + i + ' and Index ' + j + '\n';
+            }
+        }
+    }
+    return chain;
 }
 
-console.log('32) ' + findPairSum());
+console.log('32) findPairSum');
+console.log(findPairSum([10,20,10,40,50,60,70],50));
 
 /*Write a JavaScript function to retrieve the value of a given property from all elements in an array.*/
 
-function validValues(){
+function validValues(arr){
+    reg = /^-?[1-9]*$/gm
+    for(i=0;i<arr.length;i++){
+        if(reg.test(arr[i]) != true){
+            arr.splice(i,1);
+            i--;
+        }
+    }
 
+    return arr;
 }
 
-console.log('33) ' + validValues());
+console.log('33) validValues');
+console.log(validValues([NaN, 0, 15, false, -22, '',undefined, 47, null]));
 
 /*Write a JavaScript function to find the longest common starting substring in a set of strings.*/
 
-function longestCommon(){
+function longestCommon(arr1){
+    var arr = arr1.concat().sort();
+    var a1 = arr[0];
+    var a2 = arr[arr.length-1];
+    var L = a1.length;
+    var i = 0;
 
+    while(i < L && a1.charAt(i) === a2.charAt(i)) i++;
+        return a1.substring(0, i);
 }
 
-console.log('34) ' + longestCommon());
+console.log('34) longestCommon');
+console.log(longestCommon(['goo', 'google']));
 
 /*Write a JavaScript function to fill an array with values (numeric, string with one character) on supplied bounds.
 Test Data : 
 console.log(num_string_range('a', "z", 2)); ["a", "c", "e", "g", "i", "k", "m", "o", "q", "s", "u", "w", "y"]*/
 
-function fillArray(){
+function fillArray(letter1,letter2,count){
+    var arr = [];
+    var letter = '';
+    var a = letter1.charCodeAt(0);
+    var z = letter2.charCodeAt(0);
+    for(i=a;i<z;i=i+count){
+        arr.push(String.fromCharCode(i));
+    }
 
+    return arr;
 }
 
-console.log('35) ' + fillArray());
+console.log('35) fillArray');
+console.log(fillArray('a', "z", 2));
 
 /*Write a JavaScript function to remove a specific element from an array.*/
 
-function removeElement(){
+function removeElement(arr,element){
+    for(i=0;i<arr.length;i++){
+        if(arr[i] === element){
+            arr.splice(i,1);
+            i--;
+        }
+    }
 
+    return arr;
 }
 
-console.log('36) ' + removeElement());
+console.log('36) removeElement');
+console.log(removeElement([2, 5, 9, 6], 5));
 
 /*Write a JavaScript function to find an array contains a specific element.*/
 
-function findArrayWithElement(){
+function findArrayWithElement(arr,element){
+    var chain = '';
+    for(i=0;i<arr.length;i++){
+        if(arr[i] === element){
+            chain += 'Index ' + i + ' Element ' + arr[i] + '\n';
+        }
+    }
 
+    return chain;
 }
 
-console.log('37) ' + findArrayWithElement());
+console.log('37) findArrayWithElement');
+console.log(findArrayWithElement([2, 5, 9, 6], 5));
 
 /*Write a JavaScript script to empty an array keeping the original size.*/
 
-function emptyArray(){
-
+function emptyArray(arr){
+    arr.fill(null);
+    return arr.length;
 }
 
-console.log('38) ' + emptyArray());
+console.log('38) emptyArray')
+console.log(emptyArray([1,2,3]));
 
 /*Write a JavaScript function to get nth largest element from an unsorted array.*/
 
-function getNthLargest(){
+function getNthLargest(arr,element){
+    arr.sort(function(a,b){
+        return a - b;
+    })
+
+    return arr[element];
 
 }
 
-console.log('39) ' + getNthLargest());
+console.log('39) getNthLargest');
+console.log(getNthLargest([ 43, 56, 23, 89, 88, 90, 99, 652], 4));
 
 /*Write a JavaScript function to create a specified number of elements with pre-filled numeric value array.*/
 
-function _arrayFilled(){
+function _arrayFilled(repeat,item){
+    var arr = [];
+    for(i=0;i<repeat;i++){
+        arr.push(item);
+    }
 
+    return arr;
 }
 
-console.log('40) ' + _arrayFilled());
+console.log('40) array_filled (numeric)');
+console.log(_arrayFilled(6, 0));
+console.log(_arrayFilled(4, 11));
 
 /*Write a JavaScript function to filter false, null, 0 and blank values from an array.*/
 
-function filterFalsy(){
+function filterFalsy(arr){
+    for(i=0;i<arr.length;i++){
+        if(arr[i] === false || arr[i] === null || arr[i] === 0 || arr[i] === ''){
+            arr.splice(i,1);
+            i--;
+        }
+    }
 
+    return arr;
 }
 
-console.log('41) ' + filterFalsy());
+console.log('41) filterFalsy');
+console.log(filterFalsy([58, '', 'abcd', true, null, false, 0]));
